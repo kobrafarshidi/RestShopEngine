@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% block title %}پروفایل من - فروشگاه{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- بخش اطلاعات کاربر -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <div class="profile-avatar mb-3">
+                        <i class="bi bi-person-circle" style="font-size: 5rem; color: #667eea;"></i>
+                    </div>
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="text-muted small mb-1">{{ user.email }}</p>
+                    {% if user.phone %}
+                    <p class="text-muted small mb-1">
+                        <i class="bi bi-telephone"></i> {{ user.phone }}
+                    </p>
+                    {% endif %}
+                    {% if user.address %}
+                    <p class="text-muted small">
+                        <i class="bi bi-geo-alt"></i> {{ user.address|truncatewords:5 }}
+                    </p>
+                    {% endif %}
+                    <hr>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="bi bi-box-arrow-right"></i> خروج از حساب
+                    </a>
+                </div>
+            </div>
+
+            <!-- آمار سریع -->
+            <div class="card shadow-sm mt-3">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">
+                        <i class="bi bi-graph-up"></i> آمار من
+                    </h6>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted small">تعداد سفارشات:</span>
+                        <span class="badge bg-primary">{{ orders.count }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted small">مجموع خرید:</span>
+                        <span class="badge bg-success">
+                            {% widthratio orders|length 1 1 as total %}
+                            {{ orders|length }} سفارش
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش سفارشات -->
+        <div class="col-md-9">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bag-check"></i> سفارشات من
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if orders %}
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>شماره سفارش</th>
+                                    <th>وضعیت</th>
+                                    <th>قیمت کل</th>
+                                    <th>آدرس</th>
+                                    <th>تاریخ ثبت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>
+                                        <strong class="text-primary">#{{ order.id }}</strong>
+                                    </td>
+                                    <td>
+                                        {% if order.status == "pending" %}
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="bi bi-clock"></i> در انتظار پرداخت
+                                            </span>
+                                        {% elif order.status == "processing" %}
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-arrow-repeat"></i> در حال پردازش
+                                            </span>
+                                        {% elif order.status == "shipped" %}
+                                            <span class="badge bg-primary">
+                                                <i class="bi bi-truck"></i> ارسال شده
+                                            </span>
+                                        {% elif order.status == "delivered" %}
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-check-circle"></i> تحویل داده شده
+                                            </span>
+                                        {% elif order.status == "cancelled" %}
+                                            <span class="badge bg-danger">
+                                                <i class="bi bi-x-circle"></i> لغو شده
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ order.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <strong>{{ order.total_price|floatformat:0 }}</strong> تومان
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">
+                                            {{ order.address|truncatewords:5|default:"ثبت نشده" }}
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <small>{{ order.created_at|date:"Y/m/d" }}</small>
+                                        <br>
+                                        <small class="text-muted">{{ order.created_at|date:"H:i" }}</small>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#orderModal{{ order.id }}">
+                                            <i class="bi bi-eye"></i> جزئیات
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal برای جزئیات سفارش -->
+                                <div class="modal fade" id="orderModal{{ order.id }}" tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title">
+                                                    <i class="bi bi-receipt"></i> جزئیات سفارش #{{ order.id }}
+                                                </h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <p><strong>وضعیت:</strong>
+                                                            {% if order.status == "pending" %}
+                                                                در انتظار پرداخت
+                                                            {% elif order.status == "processing" %}
+                                                                در حال پردازش
+                                                            {% elif order.status == "shipped" %}
+                                                                ارسال شده
+                                                            {% elif order.status == "delivered" %}
+                                                                تحویل داده شده
+                                                            {% else %}
+                                                                {{ order.status }}
+                                                            {% endif %}
+                                                        </p>
+                                                        <p><strong>تاریخ ثبت:</strong> {{ order.created_at|date:"Y/m/d H:i" }}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p><strong>آدرس:</strong> {{ order.address|default:"ثبت نشده" }}</p>
+                                                        <p><strong>تلفن:</strong> {{ order.phone|default:"ثبت نشده" }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <h6 class="border-bottom pb-2 mb-3">محصولات سفارش:</h6>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th>محصول</th>
+                                                                <th>تعداد</th>
+                                                                <th>قیمت واحد</th>
+                                                                <th>جمع</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for item in order.items.all %}
+                                                            <tr>
+                                                                <td>{{ item.product.name }}</td>
+                                                                <td>{{ item.quantity }}</td>
+                                                                <td>{{ item.price|floatformat:0 }} تومان</td>
+                                                                <td><strong>{{ item.total|floatformat:0 }} تومان</strong></td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                        <tfoot class="table-light">
+                                                            <tr>
+                                                                <td colspan="3" class="text-end"><strong>جمع کل:</strong></td>
+                                                                <td><strong class="text-primary">{{ order.total_price|floatformat:0 }} تومان</strong></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                {% if order.status == "pending" %}
+                                                <a href="#" class="btn btn-success">
+                                                    <i class="bi bi-credit-card"></i> پرداخت
+                                                </a>
+                                                {% endif %}
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-bag-x" style="font-size: 4rem; color: #ccc;"></i>
+                        <h5 class="mt-3 text-muted">شما هنوز سفارشی ثبت نکرده‌اید</h5>
+                        <p class="text-muted">برای خرید محصولات به صفحه محصولات بروید</p>
+                        <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">
+                            <i class="bi bi-bag-plus"></i> مشاهده محصولات
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+    border-radius: 50%;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+</style>
+
+{% endblock %}

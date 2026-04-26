@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}خانه - فروشگاه{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-text">
+                {% if user.is_authenticated %}
+                    <h1>سلام {{ user.username }} عزیز 👋</h1>
+                    <p>خوشحالیم که دوباره اینجایی! آماده خرید محصولات جدید؟</p>
+                {% else %}
+                    <h1>خرید آسان، کیفیت عالی</h1>
+                    <p>بهترین محصولات با قیمت‌های استثنایی منتظر شماست</p>
+                {% endif %}
+                <div class="hero-buttons">
+                    <a href="{% url 'product_list' %}" class="btn btn-primary">
+                        🛍️ مشاهده محصولات
+                    </a>
+                    <a href="{% url 'category_list' %}" class="btn btn-outline">
+                        📂 دسته‌بندی‌ها
+                    </a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                💝
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h5>ارسال سریع و رایگان</h5>
+            <p>ارسال رایگان برای خریدهای بالای 500 هزار تومان در سراسر کشور</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h5>ضمانت اصالت کالا</h5>
+            <p>تمامی محصولات اصل و با گارانتی معتبر و قابل استعلام</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎧</div>
+            <h5>پشتیبانی 24 ساعته</h5>
+            <p>تیم پشتیبانی ما همیشه آماده پاسخگویی به سوالات شماست</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-card">
+        <div class="cta-content">
+            <div class="cta-text">
+                <h2>آماده کشف محصولات جدید هستید؟</h2>
+                <p>هزاران محصول با تخفیف‌های ویژه در انتظار شماست</p>
+            </div>
+            <div class="cta-button">
+                <a href="{% url 'category_list' %}" class="btn btn-light">
+                    شروع خرید ←
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

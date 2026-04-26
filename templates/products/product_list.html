@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}لیست محصولات{% endblock %}
+
+{% block content %}
+
+<h2 style="margin-bottom: 25px; color: #333;">✨ همه محصولات</h2>
+
+<!-- دکمه‌های مرتب‌سازی -->
+<div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+    <a href="?sort=price_asc" style="background: #eee; padding: 8px 18px; border-radius: 25px; text-decoration: none; color: #333;">💰 ارزان‌ترین</a>
+    <a href="?sort=price_desc" style="background: #eee; padding: 8px 18px; border-radius: 25px; text-decoration: none; color: #333;">💰 گران‌ترین</a>
+    <a href="?sort=name" style="background: #eee; padding: 8px 18px; border-radius: 25px; text-decoration: none; color: #333;">🔤 الفبا</a>
+    <a href="?sort=-created_at" style="background: #eee; padding: 8px 18px; border-radius: 25px; text-decoration: none; color: #333;">🆕 جدیدترین</a>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <img src="https://via.placeholder.com/300x220?text=No+Image" alt="{{ product.name }}">
+        {% endif %}
+        <div class="info">
+            <h3>{{ product.name }}</h3>
+            <div class="price">{{ product.price|floatformat:0 }} تومان</div>
+            <p style="color: #777; font-size: 12px; margin-bottom: 12px;">موجودی: {{ product.stock }}</p>
+            <a href="{% url 'products:product_detail' product.id %}" class="btn">مشاهده جزئیات</a>
+        </div>
+    </div>
+    {% empty %}
+    <p style="text-align: center; grid-column: span 3;">هیچ محصولی وجود ندارد.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

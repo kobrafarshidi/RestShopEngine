@@ -1,0 +1,16 @@
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+.git
+.gitignore
+Dockerfile
+.dockerignore
+media
+node_modules
+.env
+.idea
+.vscode

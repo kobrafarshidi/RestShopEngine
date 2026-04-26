@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}فروشگاه{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Navbar -->
+<div style="background: #1a1a2e; padding: 15px 0; border-bottom: 2px solid #00c896;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+            <a href="/" style="color: white; text-decoration: none; font-size: 24px; font-weight: bold; background: #00c896; padding: 8px 20px; border-radius: 30px;">فروشگاه</a>
+            <div style="display: flex; gap: 25px; align-items: center; flex-wrap: wrap;">
+                <a href="/" style="color: white; text-decoration: none;">خانه</a>
+                <div style="position: relative;">
+                    <button id="productsBtn" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer; padding: 8px 0;">محصولات ▼</button>
+                    <div id="productsMenu" style="position: absolute; top: 30px; right: 0; background: white; min-width: 160px; border-radius: 8px; display: none; padding: 10px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000;">
+                        <a href="{% url 'products:product_list' %}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; text-align: right;">🛍️ همه محصولات</a>
+                        <div style="height: 1px; background: #ddd; margin: 5px 0;"></div>
+                        <a href="{% url 'category_list' %}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; text-align: right;">📂 دسته‌بندی‌ها</a>
+                    </div>
+                </div>
+
+                <!-- سبد خرید با تعداد -->
+                <a href="{% url 'cart:cart_view' %}" style="color: white; text-decoration: none; position: relative;">
+                    🛒 سبد خرید
+                    {% if cart_count > 0 %}
+                        <span style="position: absolute; top: -8px; right: -12px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px;">{{ cart_count }}</span>
+                    {% endif %}
+                </a>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile_page' %}" style="color: white; text-decoration: none;">👤 پروفایل</a>
+                    <a href="{% url 'logout' %}" style="color: #ff6b6b; text-decoration: none;">🚪 خروج</a>
+                {% else %}
+                    <a href="{% url 'login' %}" style="color: white; text-decoration: none;">🔑 ورود</a>
+                    <a href="{% url 'register' %}" style="background: #00c896; color: white; padding: 6px 15px; border-radius: 20px; text-decoration: none;">📝 ثبت‌نام</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var btn = document.getElementById('productsBtn');
+    var menu = document.getElementById('productsMenu');
+    if(btn && menu) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if(menu.style.display === 'block') { menu.style.display = 'none'; }
+            else { menu.style.display = 'block'; }
+        });
+        document.addEventListener('click', function(e) {
+            if(e.target !== btn && !menu.contains(e.target)) { menu.style.display = 'none'; }
+        });
+    }
+</script>
+
+<!-- محتوای اصلی -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    {% block content %}{% endblock %}
+</div>
+
+<!-- فوتر -->
+<footer style="background: #1a1a2e; color: white; text-align: center; padding: 20px; margin-top: 50px;">
+    <div>© 2026 فروشگاه - تمامی حقوق محفوظ است</div>
+</footer>
+
+</body>
+</html>
