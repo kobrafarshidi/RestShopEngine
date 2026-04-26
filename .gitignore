@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+db.sqlite3
+
+# Media files (user uploads)
+media/
+
+# Virtual environment
+.venv/
+
+# VSCode / IDE / PyCharm
+.idea/
+.vscode/
+
+# Migrations cache (optional)
+*.log
+
+# Static files collected (if using collectstatic)
+staticfiles/
