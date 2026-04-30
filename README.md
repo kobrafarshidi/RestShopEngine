@@ -1,8 +1,8 @@
-# 🛍️ Django Shop
+# 🛍️ Django Shop (RestShopEngine)
 
 > فروشگاه اینترنتی با **Django + DRF + PostgreSQL** | مناسب برای توسعه و مقیاس‌پذیری
 
-[![Django](https://img.shields.io/badge/Django-5.x-green)](https://www.djangoproject.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)](https://www.postgresql.org/)
 [![DRF](https://img.shields.io/badge/DRF-3.15-red)](https://www.django-rest-framework.org/)
 
 ---
