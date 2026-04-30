@@ -2,23 +2,38 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
 # Django stuff:
 db.sqlite3
-.env                    # ← این خط را اضافه کن
+.env                   
+*.log
+*.pot
+*.pyc
+local_settings.py
 
 # Media files (user uploads)
 media/
+staticfiles/
+static/
 
 # Virtual environment
 .venv/
+venv/
+ENV/
+env/
 
 # VSCode / IDE / PyCharm
 .idea/
 .vscode/
+*.swp
+*.swo
+*~
+.DS_Store
 
 # Migrations cache (optional)
-*.log
+*/migrations/__pycache__/
+*/migrations/*.pyc
 
 # Static files collected (if using collectstatic)
 staticfiles/
