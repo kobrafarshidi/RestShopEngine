@@ -36,8 +36,7 @@
       <td>
         <img src="static/images/main.png" alt="صفحه اصلی" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
         <br />
-        <strong>صفحه اصلی</strong><br />
-        
+        <strong>صفحه اصلی</strong>
       </td>
     </table>
     <tr align="center">
