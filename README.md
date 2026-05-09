@@ -6,45 +6,43 @@
 [![DRF](https://img.shields.io/badge/DRF-3.15-red)](https://www.django-rest-framework.org/)
 
 ---
-
 ## 🚀 امکانات
 
 <div align="center">
   <table>
     <tr align="center">
       <td>
-        <img src="static/images/admin.png" alt="مدیریت محصول و دسته‌بندی" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <img src="static/images/admin.png" alt="مدیریت محصول" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
         <br />
-        <strong>مدیریت محصول و دسته‌بندی</strong><br />
+        <strong>مدیریت محصول</strong><br />
         <sub>(پنل ادمین)</sub>
       </td>
       <td>
-        <img src="static/images/cart.jpg" alt="سبد خرید" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <img src="static/images/products.jpg" alt="محصولات" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
         <br />
-        <strong>سبد خرید</strong><br />
-        <sub>(اضافه/حذف کالا)</sub>
+        <strong>محصولات</strong><br />
+        <sub>(دسته‌بندی)</sub>
       </td>
       <td>
-        <img src="static/images/order.png" alt="ثبت سفارش" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <img src="static/images/cart.jpg" alt="سبد خرید" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
         <br />
-        <strong>ثبت سفارش</strong><br />
-        <sub>(نهایی‌سازی خرید)</sub>
+        <strong>سبد خرید</strong>
       </td>
       <td>
-        <img src="static/images/products.jpg" alt="محصولات" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <img src="static/images/order.png" alt="ثبت سفارش" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
         <br />
-        <strong>محصولات و دسته‌بندی</strong><br />
-        <sub>(نمایش و فیلتر)</sub>
+        <strong>ثبت سفارش</strong>
       </td>
-    </tr>
-    <tr align="center">
-      <td colspan="4">
-        <strong>🔐 ثبت‌نام و احراز هویت کاربران + 💳 پرداخت شبیه‌سازی‌شده</strong>
+      <td>
+        <img src="static/images/main.png" alt="صفحه اصلی" width="130" height="95" style="border-radius: 10px; object-fit: cover;">
+        <br />
+        <strong>صفحه اصلی</strong><br />
+        <sub>(نمایش محصولات)</sub>
       </td>
-    </tr>
+    </table>
     <tr align="center">
-      <td colspan="4">
-        <strong>✨ API کامل با DRF (RESTful)</strong>
+      <td colspan="5">
+        <strong>🔐 ثبت‌نام و احراز هویت + 💳 پرداخت شبیه‌سازی‌شده + ✨ API کامل با DRF</strong>
       </td>
     </tr>
   </table>
