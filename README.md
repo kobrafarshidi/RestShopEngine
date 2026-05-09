@@ -9,11 +9,46 @@
 
 ## 🚀 امکانات
 
-- مدیریت محصول و دسته‌بندی (پنل ادمین)
-- ثبت‌نام و احراز هویت کاربران
-- سبد خرید و ثبت سفارش
-- پرداخت شبیه‌سازی‌شده
-- API کامل با DRF
+<div align="center">
+  <table>
+    <tr align="center">
+      <td>
+        <img src="static/images/admin.png" alt="مدیریت محصول و دسته‌بندی" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <br />
+        <strong>مدیریت محصول و دسته‌بندی</strong><br />
+        <sub>(پنل ادمین)</sub>
+      </td>
+      <td>
+        <img src="static/images/cart.jpg" alt="سبد خرید" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <br />
+        <strong>سبد خرید</strong><br />
+        <sub>(اضافه/حذف کالا)</sub>
+      </td>
+      <td>
+        <img src="static/images/order.png" alt="ثبت سفارش" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <br />
+        <strong>ثبت سفارش</strong><br />
+        <sub>(نهایی‌سازی خرید)</sub>
+      </td>
+      <td>
+        <img src="static/images/products.jpg" alt="محصولات" width="140" height="100" style="border-radius: 10px; object-fit: cover;">
+        <br />
+        <strong>محصولات و دسته‌بندی</strong><br />
+        <sub>(نمایش و فیلتر)</sub>
+      </td>
+    </tr>
+    <tr align="center">
+      <td colspan="4">
+        <strong>🔐 ثبت‌نام و احراز هویت کاربران + 💳 پرداخت شبیه‌سازی‌شده</strong>
+      </td>
+    </tr>
+    <tr align="center">
+      <td colspan="4">
+        <strong>✨ API کامل با DRF (RESTful)</strong>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -27,9 +62,9 @@
 
 ```bash
 git clone https://github.com/kobrafarshidi/RestShopEngine.git
-cd django-shop
+cd RestShopEngine
 python -m venv venv
-source venv/bin/activate 
+source venv/bin/activate  # در ویندوز: venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py createsuperuser
